@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set up a static folder (public) for our web app
-app.use(express.static("app/public"));
+app.use(express.static("/app/public"));
 
 // require our routes
 require("./app/routes/apiRoutes.js")(app);
