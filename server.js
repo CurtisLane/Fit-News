@@ -21,7 +21,7 @@ require("./app/routes/htmlRoutes.js")(app);
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Connect to mongoDB with mongoose
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 // app listening on specified PORT
 app.listen(PORT, function() {
