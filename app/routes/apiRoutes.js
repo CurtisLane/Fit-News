@@ -4,28 +4,103 @@ const db = require('../models')
 
 module.exports = function(app){
 
-    app.get('/api/articles', function(req,res){
-        db.Article.find({})
-        .populate("Comment")
-        .then(function(dbArticle) {
+  // get all articles
+  app.get('/api/articles', function(req,res){
+      db.Article.find({})
+      .populate("Comment")
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  })
+  
+  // Get one article by id
+  app.get('/api/articles/:id', function(req,res){
+      db.Article.findOne({_id: req.params.id})
+      .populate("comments")
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  })
+
+  // Post a comment and put the _id into the Article comment array
+  app.post('/api/articles/:id', function(req, res){
+      db.Comment.create(req.body)
+      .then(function(dbComment){
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {comments: dbComment._id}}, {new: true});
+      })
+      .then(function(dbArticle) {
           res.json(dbArticle);
         })
-        .catch(function(err) {
-          res.json(err);
-        });
-    })
+      .catch(function(err) {
+      res.json(err);
+      });
+  })
 
-    app.post('/api/articles', function(req, res){
-        db.Article.create(req.body)
-        .then(function(dbArticle) {
-            res.json(dbArticle);
+  // Article scraper
+  app.get("/api/scrape", function(req, res) {
+
+    axios.get("https://www.bodybuilding.com/category/workouts").then(function(response) {
+      
+      var $ = cheerio.load(response.data);
+
+      $("span.cms-article-list--article").each(function(i, element) {        
+       
+        var result = {};
+
+        // Extract text from scraped page
+        result.headline = $(element)
+          .children('figure')
+          .children('figcaption')
+          .children('h3.title')
+          .children('a')
+          .text();
+        result.summary = $(element)
+          .children('figure')
+          .children('figcaption')
+          .children('span.description')
+          .text();
+        result.URL = $(element)
+          .children('figure')
+          .children('figcaption')
+          .children('h3.title')
+          .children('a')
+          .attr('href');
+        result.image = $(element)
+          .children('figure')
+          .children('a')
+          .children('div.thumb')
+          .children('img')
+          .attr('data-srcset').split(" ")[0];
+
+        db.Article.create(result)
+          .then(function(dbArticle) {
+            console.log(dbArticle);
           })
-        .catch(function(err) {
+          .catch(function(err) {
+            console.log(err);
+          }); 
+      });
+      res.send("Scrape Complete");
+    });
+  });
+
+  // Get all articles
+  app.get("/articles", function(req, res) {
+    db.Article.find({})
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
         res.json(err);
-        });
-    })
-
-
+      });
+  });
 
 
 

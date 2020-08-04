@@ -18,7 +18,7 @@ require("./app/routes/apiRoutes.js")(app);
 require("./app/routes/htmlRoutes.js")(app);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/fit-news";
 
 // Connect to mongoDB with mongoose
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true});

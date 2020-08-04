@@ -4,14 +4,17 @@ const articleSchema = new Schema({
     headline: {
         type: String,
         required: true,
+        unique: true
     },
     summary: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     URL: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     image: {
         type: String,
