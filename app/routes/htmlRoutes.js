@@ -5,4 +5,7 @@ module.exports = function(app){
     app.get('/', (req,res) => {
         res.sendFile(path.join(__dirname, '../public/html/index.html'))
     });
+    app.get('/js/app.js', (req,res) => {
+        res.sendFile(path.join(__dirname, '../public/js/app.js'))
+    });
 }
