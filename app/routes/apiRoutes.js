@@ -91,7 +91,7 @@ module.exports = function(app){
   });
 
   // Get all articles
-  app.get("/articles", function(req, res) {
+  app.get("/api/articles", function(req, res) {
     db.Article.find({})
       .then(function(dbArticle) {
         res.json(dbArticle);
@@ -102,7 +102,15 @@ module.exports = function(app){
       });
   });
 
-
+  app.get('/api/clearDatabase', function(req, res){
+    db.Article.deleteMany({}, function(error, result){
+      console.log('deleted')
+    })
+    db.Comment.deleteMany({}, function(error, result){
+      console.log('deleted')
+    })
+    res.end()
+  })
 
 
 }
