@@ -104,13 +104,19 @@ module.exports = function(app){
 
   app.get('/api/clearDatabase', function(req, res){
     db.Article.deleteMany({}, function(error, result){
-      console.log('deleted')
+      console.log('deleted all articles')
     })
     db.Comment.deleteMany({}, function(error, result){
-      console.log('deleted')
+      console.log('deleted all comments')
     })
     res.end()
   })
 
+  app.get('/api/comment/:id', function(req, res){
+    db.Comment.deleteOne({_id: req.params.id}, function(err, result){
+      console.log('deleted comment')
+    })
+    res.end()
+  })
 
 }
