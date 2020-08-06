@@ -22,24 +22,31 @@
     
     <title>Fit-News</title>
 </head>
-<body class="bg-dark text-light">
+<body class="bg-dark text-light text-center">
     <div class="container">
-        <div class="row text-left my-4">
+        <div class="row my-4">
             <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                 <h1>Fit-News</h1>
-                <h3 class="mt-4">Your source for articles that will get you PUMPED!</h3>
-                <small>All articles come from bodybuilding.com</small>
+                <h4 class="mt-4">Your source for articles that will get you PUMPED!</h4>
+                <small id="small"></small>
             </div>
         </div>
         <!-- api links go here if there is any info in the db -->
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" id="apiLinksDiv">
-
+            <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 text-center" id="apiLinksDiv">
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <a href="/api/articles">View Database</a>
+                    </div>
+                    <div class="col-6 text-left">
+                        <a href="/api/clearDatabase">Clear Database</a>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Articles or Get Articles button goes here -->
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2" id="articleDiv">
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3" id="articleDiv">
 
             </div>
         </div>

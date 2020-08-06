@@ -53,9 +53,9 @@ $(document).ready(function(){
 
     function populateArticleDiv(){
         renderAddCommentBtn()
+
         if (articleArr.length){
             renderArticles()
-            renderApiLinks()
         } else {
             $('#articleDiv').empty()
             renderScrapeButton()
@@ -63,7 +63,7 @@ $(document).ready(function(){
     }
 
     function renderScrapeButton(){
-        let scrapeBtnDiv = $('<div>').addClass('mx-auto my-4 text-left')
+        let scrapeBtnDiv = $('<div>').addClass('mx-auto my-4')
         let scrapeBtn = $('<button>').text('Get Articles')
         scrapeBtn.addClass('btn btn-secondary mx-auto')
         scrapeBtn.attr('id', 'scrapeBtn')
@@ -101,6 +101,7 @@ $(document).ready(function(){
     function renderArticles(){
         $('#articleDiv').empty()
         $('#commentDiv').empty()
+        $('#small').text('Select a single post to add comments!')
         for (let i=0; i<articleArr.length; i++){
             
             let comments = articleArr[i].comments
@@ -110,6 +111,7 @@ $(document).ready(function(){
             let url = articleArr[i].URL
             let img = articleArr[i].image 
             
+            // load comments only on single posts
             if (articleArr.length === 1 && comments.length >= 1){
                 commentArr = comments
                 console.log(commentArr)
@@ -121,16 +123,20 @@ $(document).ready(function(){
                     console.log(commentId)
                     console.log(commentText)
 
-                    let commentCard = $('<div>').addClass('card text-dark my-4')
-                    commentCard.attr('data-id', commentId)
-                    let commentCardBody = $('<div>').addClass('card-body')
-                    let commentCardText = $('<p>').addClass('card-text')
-                    commentCardText.text(commentText)
-                    let commentDelete = $('<button>').addClass('btn btn-danger')
-                    commentDelete.attr('id', 'commentDeleteBtn')
-                    commentDelete.attr('data-id', commentId)
-                    commentDelete.attr('data-article-id', id)
-                    commentDelete.text('Delete')
+                    let commentCard = $('<div>')
+                    .addClass('card text-dark my-4')
+                    .attr('data-id', commentId)
+                    let commentCardBody = $('<div>')
+                    .addClass('card-body')
+                    let commentCardText = $('<p>')
+                    .addClass('card-text')
+                    .text(commentText)
+                    let commentDelete = $('<button>')
+                    .addClass('btn btn-danger')
+                    .attr('id', 'commentDeleteBtn')
+                    .attr('data-id', commentId)
+                    .attr('data-article-id', id)
+                    .text('Delete')
 
                     commentCardBody.append(commentCardText, commentDelete)
                     commentCard.append(commentCardBody)
@@ -140,21 +146,27 @@ $(document).ready(function(){
             }
 
             // Build bootstrap card with article data
-            let card = $('<div>').addClass('card text-dark my-4')
-            card.attr('data-id', id)
-            card.attr('id', 'articleCard')
-            let cardImg = $('<img>').addClass('car-img-top')
-            cardImg.css('width', '100%')
-            cardImg.css('height', 'auto')
-            cardImg.attr('src', img)
-            let cardBody = $('<div>').addClass('card-body')
-            let cardTitle = $('<h5>').addClass('card-title')
-            cardTitle.text(headline)            
-            let cardText = $('<p>').addClass('card-text')
-            cardText.text(summary)
-            let cardBtn = $('<a>').addClass('btn btn-secondary')
-            cardBtn.attr('href', url)
-            cardBtn.text('Visit Site')
+            let card = $('<div>')
+            .addClass('card text-dark my-4')
+            .attr('data-id', id)
+            .attr('id', 'articleCard')
+            let cardImg = $('<img>')
+            .addClass('car-img-top')
+            .css('width', '100%')
+            .css('height', '50%')
+            .attr('src', img)
+            let cardBody = $('<div>')
+            .addClass('card-body')
+            let cardTitle = $('<h5>')
+            .addClass('card-title')
+            .text(headline)            
+            let cardText = $('<p>')
+            .addClass('card-text')
+            .text(summary)
+            let cardBtn = $('<a>')
+            .addClass('btn btn-secondary')
+            .attr('href', url)
+            .text('Visit Site')
 
             // append card together and add to page
             cardBody.append(cardTitle, cardText, cardBtn)
@@ -178,17 +190,10 @@ $(document).ready(function(){
         }
     }
 
-    function renderApiLinks(){
-
-    }
     /*====================================
         Function Calls
       ====================================*/
 
     populateArticleDiv()
-
-    
-
-
 
 })

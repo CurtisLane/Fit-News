@@ -109,7 +109,7 @@ module.exports = function(app){
     db.Comment.deleteMany({}, function(error, result){
       console.log('deleted all comments')
     })
-    res.end()
+    res.send('Database has been cleared. <a href="/">Click Here</a> to go back.')
   })
 
   app.get('/api/comment/:id', function(req, res){
