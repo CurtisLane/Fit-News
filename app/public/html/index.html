@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
@@ -22,30 +22,38 @@
     
     <title>Fit-News</title>
 </head>
-<body class="bg-dark text-light text-center">
+<body class="bg-secondary text-light text-center">
+
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Fit-News</a>
+        <span class="navbar-text d-sm-none d-none d-md-block mr-auto">
+            Your source for articles that will get you PUMPED!
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ml-auto navbar-toggle">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" id="scrapeBtn">Get Articles <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/articles">View Database</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/clearDatabase">Clear Database</a>
+            </li>
+          </ul>
+          
+        </div>
+      </nav>
+
+
     <div class="container">
-        <div class="row my-4">
-            <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                <h1>Fit-News</h1>
-                <h4 class="mt-4">Your source for articles that will get you PUMPED!</h4>
-                <small id="small"></small>
-            </div>
-        </div>
-        <!-- api links go here if there is any info in the db -->
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 text-center" id="apiLinksDiv">
-                <div class="row">
-                    <div class="col-6 text-right">
-                        <a href="/api/articles">View Database</a>
-                    </div>
-                    <div class="col-6 text-left">
-                        <a href="/api/clearDatabase">Clear Database</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Articles or Get Articles button goes here -->
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3" id="articleDiv">
 
             </div>
@@ -53,7 +61,7 @@
         <!-- Comments and Add Comment button goes here -->
         <div class="row my-4">
             <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4" id="addCommentDiv">
-                <button type="button" id="addCommentBtn" class="btn btn-secondary my-4">Add Comment</button>
+                <button type="button" id="addCommentBtn" class="btn btn-dark">Add Comment</button>
                 <div id="commentDiv">
                     
                 </div>

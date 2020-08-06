@@ -1,11 +1,12 @@
 $(document).ready(function(){
-    console.log('Ready!')
 
     /*====================================
         Global Variables
       ====================================*/
+
     let articleArr = []
     let commentArr = []
+
     /*====================================
         Event Handlers
       ====================================*/
@@ -63,12 +64,16 @@ $(document).ready(function(){
     }
 
     function renderScrapeButton(){
-        let scrapeBtnDiv = $('<div>').addClass('mx-auto my-4')
-        let scrapeBtn = $('<button>').text('Get Articles')
-        scrapeBtn.addClass('btn btn-secondary mx-auto')
-        scrapeBtn.attr('id', 'scrapeBtn')
+        let scrapeBtnDiv = $('<div>')
+        .addClass('my-4')
+        let scrapeH = $('<h4>')
+        .text('Click "Get Articles" to begin!')
+        let scrapeBtn = $('<button>')
+        .text('Get Articles')
+        .addClass('btn btn-dark mt-4')
+        .attr('id', 'scrapeBtn')
 
-        scrapeBtnDiv.append(scrapeBtn)
+        scrapeBtnDiv.append(scrapeH, scrapeBtn)
         $('#articleDiv').append(scrapeBtnDiv)
     }
 
@@ -101,7 +106,11 @@ $(document).ready(function(){
     function renderArticles(){
         $('#articleDiv').empty()
         $('#commentDiv').empty()
-        $('#small').text('Select a single post to add comments!')
+        let articlesHeader = $('<h3>')
+        .addClass('mt-4')
+        .text('Select a single post to add/view comments!')
+        $('#articleDiv')
+        .append(articlesHeader)
         for (let i=0; i<articleArr.length; i++){
             
             let comments = articleArr[i].comments
@@ -119,9 +128,6 @@ $(document).ready(function(){
                 for (let j = 0; j < commentArr.length; j++){
                     let commentId = commentArr[j]._id
                     let commentText = commentArr[j].comment
-
-                    console.log(commentId)
-                    console.log(commentText)
 
                     let commentCard = $('<div>')
                     .addClass('card text-dark my-4')
@@ -141,7 +147,6 @@ $(document).ready(function(){
                     commentCardBody.append(commentCardText, commentDelete)
                     commentCard.append(commentCardBody)
                     $('#commentDiv').append(commentCard)
-
                 }
             }
 
@@ -150,6 +155,11 @@ $(document).ready(function(){
             .addClass('card text-dark my-4')
             .attr('data-id', id)
             .attr('id', 'articleCard')
+            .hover(function() {
+                $(this).css('cursor','pointer');
+            }, function() {
+                $(this).css('cursor','auto');
+            });
             let cardImg = $('<img>')
             .addClass('car-img-top')
             .css('width', '100%')
@@ -195,5 +205,4 @@ $(document).ready(function(){
       ====================================*/
 
     populateArticleDiv()
-
 })
