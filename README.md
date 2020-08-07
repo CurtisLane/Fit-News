@@ -22,7 +22,7 @@ Node.js, Express.js, MongoDB, Mongoose, HTML5, CSS3, and Bootstrap.
         * [routes](./app/routes/)
             * [apiRoutes.js](./app/routes/apiRoutes.js)
             * [htmlRoutes.js](./app/routes/htmlRoutes.js)
-    * [images](./images/)
+    * [images](./app/public/images/)
     * [server.js](./server.js)
 
-![screenShot](/images/screenShot.jpg)
+![screenShot](./app/public/images/screenShot.jpg)
