@@ -1,7 +1,6 @@
 // Dependencies
 const express = require("express");
 const mongoose = require("mongoose");
-const favicon = require('serve-favicon')
 const path = require('path')
 
 
@@ -14,11 +13,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 // Set up a static folder (public) for our web app
 app.use(express.static(path.join(__dirname+ "/app/public")));
-app.use(favicon(path.join(__dirname, 'app', 'public', 'images', 'favicon.ico')));
-
 
 // require our routes
 require("./app/routes/apiRoutes.js")(app);
